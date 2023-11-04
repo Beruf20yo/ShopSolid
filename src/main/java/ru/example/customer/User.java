@@ -1,4 +1,4 @@
-package ru.example;
+package ru.example.customer;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,47 +9,41 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Customer {
-    @Getter
-    private final String name;
+public class User extends Customer{
     @Getter
     private byte[] password;
     @Getter
     @Setter
     private String address;
     @Getter
-    private final List<Order> orders = new ArrayList<>();
+    private final List<Order> onlineOrders = new ArrayList<>();
 
-    public Customer(String name) {
-        this.name = name;
-    }
-    public Customer(String name, String password) {
-        this.name = name;
+    public User(String name, String password) {
+        super(name);
         this.password = password.getBytes();
     }
 
-    public Customer(String name, String password, String address) {
-        this.name = name;
+    public User(String name, String password, String address) {
+        super(name);
         this.password = password.getBytes();
         this.address = address;
     }
 
+    public User(String name) {
+        super(name);
+    }
+    @Override
     public void createOrder(Order order) {
-        orders.add(order);
+        super.createOrder(order);
     }
-    private boolean checkPassword() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите пароль:");
-        String password = scanner.nextLine();
-        return Arrays.equals(this.password, password.getBytes());
-    }
+    @Override
     public String getAllCustomerInfo() {
         if(checkPassword()){
             StringBuilder sb = new StringBuilder();
-            sb.append("Имя пользователя: ").append(name)
+            sb.append("Имя пользователя: ").append(super.getName())
                     .append("\nПароль: ").append(new String(password))
                     .append("\nЗаказы за всё время: \n");
-            for(var order: orders){
+            for(var order: onlineOrders){
                 sb.append(order.toString());
             }
             return sb.toString();
@@ -57,5 +51,10 @@ public class Customer {
             return "Неверный пароль";
         }
     }
-
+    private boolean checkPassword() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите пароль:");
+        String password = scanner.nextLine();
+        return Arrays.equals(this.password, password.getBytes());
+    }
 }

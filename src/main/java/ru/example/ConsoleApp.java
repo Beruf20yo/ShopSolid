@@ -1,5 +1,7 @@
 package ru.example;
 
+import ru.example.customer.Customer;
+import ru.example.customer.User;
 import ru.example.order.Order;
 import ru.example.order.OrderBuilder;
 import ru.example.store.OnlineStore;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 public class ConsoleApp {
     private final Scanner scanner = new Scanner(System.in);
     private Customer customer;
+    private User user;
     private final Store store;
     private final OnlineStore onlineStore;
     private int day = 1;
@@ -91,18 +94,17 @@ public class ConsoleApp {
         switch (checkChose(3)){
             case 1 -> orderDelivery();
             case 2 -> {
-                System.out.println(customer.getAllCustomerInfo());
+                System.out.println(user.getAllCustomerInfo());
                 onlineMarketInterface();
             }
             case 3 -> needSomeFood();
 
         }
     }
-    //DRY
     private void orderDelivery() {
         Order order = makeOrder(onlineStore);
         customer.createOrder(order);
-        onlineStore.makeOrderToHome(customer, order);
+        onlineStore.makeOrderToHome(user, order);
     }
 
     private void checkCustomerAccount() {
@@ -117,10 +119,10 @@ public class ConsoleApp {
                 String name = scanner.nextLine();
                 System.out.println("Введите пароль: ");
                 String password = scanner.nextLine();
-                customer = onlineStore.findCustomer(name, password);
+                user = onlineStore.findCustomer(name, password);
             }
             case 2 -> {
-                customer = onlineStore.registerCustomer();
+                user = onlineStore.registerUser();
                 System.out.println("Поздравляю вы зарегистрированы!");
             }
         }
