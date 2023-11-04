@@ -20,7 +20,7 @@
 
   
 ### Magic:
-* https://github.com/Beruf20yo/ShopSolid/blob/main/src/main/java/ru/example/ConsoleApp.java#L45-46  - Перед каждой конструкцие switch() вызывается метод, который принимает в аргумент число предполагаемых case
+* https://github.com/Beruf20yo/ShopSolid/blob/main/src/main/java/ru/example/ConsoleApp.java#L45-L46  - Перед каждой конструкцие switch() вызывается метод, который принимает в аргумент число предполагаемых case
 
 ### DRY:
 * https://github.com/Beruf20yo/ShopSolid/blob/main/src/main/java/ru/example/ConsoleApp.java#L25-L36 - Перед каждой конструкцие switch() вызывается метод, который принимает в аргумент число предполагаемых case  
